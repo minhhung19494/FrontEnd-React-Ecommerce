@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/FrontEnd-React-Ecommerce/static/js/main.e42d0bb6.chunk.js",
-    "main.js.map": "/FrontEnd-React-Ecommerce/static/js/main.e42d0bb6.chunk.js.map",
+    "main.js": "/FrontEnd-React-Ecommerce/static/js/main.96caa99a.chunk.js",
+    "main.js.map": "/FrontEnd-React-Ecommerce/static/js/main.96caa99a.chunk.js.map",
     "runtime-main.js": "/FrontEnd-React-Ecommerce/static/js/runtime-main.e181d25c.js",
     "runtime-main.js.map": "/FrontEnd-React-Ecommerce/static/js/runtime-main.e181d25c.js.map",
     "static/css/2.636fa6ab.chunk.css": "/FrontEnd-React-Ecommerce/static/css/2.636fa6ab.chunk.css",
     "static/js/2.47921ae9.chunk.js": "/FrontEnd-React-Ecommerce/static/js/2.47921ae9.chunk.js",
     "static/js/2.47921ae9.chunk.js.map": "/FrontEnd-React-Ecommerce/static/js/2.47921ae9.chunk.js.map",
     "index.html": "/FrontEnd-React-Ecommerce/index.html",
-    "precache-manifest.7caa9ba5cc1189f94ab6508574b1e3f9.js": "/FrontEnd-React-Ecommerce/precache-manifest.7caa9ba5cc1189f94ab6508574b1e3f9.js",
+    "precache-manifest.10c6ae2c898c1d73acd4286c4b6c9800.js": "/FrontEnd-React-Ecommerce/precache-manifest.10c6ae2c898c1d73acd4286c4b6c9800.js",
     "service-worker.js": "/FrontEnd-React-Ecommerce/service-worker.js",
     "static/css/2.636fa6ab.chunk.css.map": "/FrontEnd-React-Ecommerce/static/css/2.636fa6ab.chunk.css.map",
     "static/js/2.47921ae9.chunk.js.LICENSE.txt": "/FrontEnd-React-Ecommerce/static/js/2.47921ae9.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.e181d25c.js",
     "static/css/2.636fa6ab.chunk.css",
     "static/js/2.47921ae9.chunk.js",
-    "static/js/main.e42d0bb6.chunk.js"
+    "static/js/main.96caa99a.chunk.js"
   ]
 }
