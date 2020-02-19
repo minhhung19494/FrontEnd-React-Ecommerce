@@ -7,3 +7,6 @@ export const authAxios = axios.create({
     Authorization: `Token ${localStorage.getItem("token")}`
   }
 });
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

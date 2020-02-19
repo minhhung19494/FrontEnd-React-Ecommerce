@@ -1,5 +1,5 @@
-const localhost = "https://django-react-ecommerce-app.herokuapp.com/";
-
+export const localhost = "https://django-react-ecommerce-app.herokuapp.com";
+export const PUBLIC_URL = "/FrontEnd-React-Ecommerce"
 const apiURL = "/api";
 
 export const endpoint = `${localhost}${apiURL}`;

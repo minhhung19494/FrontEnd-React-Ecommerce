@@ -14,6 +14,7 @@ import {
   Image,
   Item,
   Label,
+  List,
   Loader,
   Message,
   Segment,
@@ -22,7 +23,7 @@ import {
 } from "semantic-ui-react";
 import { productDetailURL, addToCartURL } from "../constants";
 import { fetchCart } from "../store/actions/cart";
-import { authAxios } from "../utils";
+import { authAxios, numberWithCommas } from "../utils";
 
 class ProductDetail extends React.Component {
   state = {
@@ -48,6 +49,7 @@ class ProductDetail extends React.Component {
     const {
       match: { params }
     } = this.props;
+    console.log(this.props.match)
     this.setState({ loading: true });
     axios
       .get(productDetailURL(params.productID))
@@ -78,7 +80,7 @@ class ProductDetail extends React.Component {
         this.setState({ loading: false });
       })
       .catch(err => {
-        this.setState({ error: err, loading: false });
+        this.setState({ error: "Please login to continue !!!", loading: false });
       });
   };
 
@@ -90,7 +92,6 @@ class ProductDetail extends React.Component {
     };
     this.setState({ formData: updatedFormData });
   };
-
   render() {
     const { data, error, formData, formVisible, loading } = this.state;
     const item = data;
@@ -121,22 +122,19 @@ class ProductDetail extends React.Component {
                 meta={
                   <React.Fragment>
                     {item.category}
-                    {item.discount_price && (
-                      <Label
-                        color={
-                          item.label === "primary"
-                            ? "blue"
-                            : item.label === "secondary"
-                              ? "green"
-                              : "olive"
-                        }
-                      >
-                        {item.label}
-                      </Label>
-                    )}
+                    {(item.discount_price != null) ?
+                      <div>
+                        <a className="ui label"><strong><strike>$ {numberWithCommas(parseInt(item.price).toFixed(2))}</strike></strong></a>
+                        <a className="ui green label"><strong>$ {numberWithCommas(parseInt(item.discount_price).toFixed(2))}</strong></a>
+                      </div>
+                      :
+                      <div>
+                        <a className="ui blue label"><strong>$ {numberWithCommas(parseInt(item.price).toFixed(2))}</strong></a>
+                      </div>
+                    }
                   </React.Fragment>
                 }
-                description={item.description}
+                // description={item.description}
                 extra={
                   <React.Fragment>
                     <Button
@@ -191,26 +189,27 @@ class ProductDetail extends React.Component {
                   return (
                     <React.Fragment key={v.id}>
                       <Header as="h3">{v.name}</Header>
-                      <Item.Group divided>
+                      <List horizontal >
                         {v.item_variations.map(iv => {
-                          return (
-                            <Item key={iv.id}>
-                              {iv.attachment && (
-                                <Item.Image
-                                  size="tiny"
-                                  src={`http://127.0.0.1:8000${iv.attachment}`}
-                                />
-                              )}
-                              <Item.Content verticalAlign="middle">
-                                {iv.value}
-                              </Item.Content>
-                            </Item>
-                          );
-                        })}
-                      </Item.Group>
+                          return (<List.Item key={iv.id}>
+                            {iv.attachment && (<Image rounded src={iv.attachment} />)}
+                            <List.Content>
+                              <List.Header>{iv.value}</List.Header>
+                            </List.Content>
+                          </List.Item>
+                          )
+                        }
+                        )}
+                      </List>
                     </React.Fragment>
                   );
                 })}
+              {data.description === "" ?
+                <div class="ui segment">
+                  <p>Chưa có mô tả cho sản phẩm này</p>
+                </div> :
+                <div class="ui segment" dangerouslySetInnerHTML={{__html: data.description}}>
+                </div>}
             </Grid.Column>
           </Grid.Row>
         </Grid>

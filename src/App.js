@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import BaseRouter from "./routes";
 import * as actions from "./store/actions/auth";
@@ -13,11 +12,9 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
         <CustomLayout {...this.props}>
           <BaseRouter />
         </CustomLayout>
-      </Router>
     );
   }
 }

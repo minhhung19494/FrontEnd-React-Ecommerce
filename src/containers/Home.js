@@ -103,12 +103,12 @@ const HomepageLayout = () => (
               bananas can be bioengineered.
             </p>
           </Grid.Column>
-          <Grid.Column floated="right" width={6}>
+          <Grid.Column floated="center" width={8}>
             <Image
               bordered
               rounded
               size="large"
-              src="/images/wireframe/white-image.png"
+              src="https://assets.awwwards.com/awards/images/2018/03/Nubikk-cover-image%20(1).jpg"
             />
           </Grid.Column>
         </Grid.Row>
@@ -135,7 +135,7 @@ const HomepageLayout = () => (
               "I shouldn't have gone with their competitor."
             </Header>
             <p style={{ fontSize: "1.33em" }}>
-              <Image avatar src="/images/avatar/large/nan.jpg" />
+              <Image avatar src="https://www.kindpng.com/picc/m/24-248442_female-user-avatar-woman-profile-member-user-profile.png" />
               <b>Nan</b> Chief Fun Officer Acme Toys
             </p>
           </Grid.Column>

@@ -48,11 +48,11 @@ class PaymentHistory extends React.Component {
       .then(res => {
         this.setState({
           loading: false,
-          payments: res.data
+          payments: res.data.results
         });
       })
       .catch(err => {
-        this.setState({ error: err, loading: false });
+        this.setState({ error: err.message, loading: false });
       });
   };
 
@@ -72,7 +72,7 @@ class PaymentHistory extends React.Component {
             return (
               <Table.Row key={p.id}>
                 <Table.Cell>{p.id}</Table.Cell>
-                <Table.Cell>${p.amount}</Table.Cell>
+                <Table.Cell>${p.amount.toFixed(2)}</Table.Cell>
                 <Table.Cell>{new Date(p.timestamp).toUTCString()}</Table.Cell>
               </Table.Row>
             );
@@ -106,6 +106,7 @@ class AddressForm extends React.Component {
     if (formType === UPDATE_FORM) {
       this.setState({ formData: address });
     }
+    console.log(this.state.formType);
   }
 
   handleToggleDefault = () => {
@@ -155,6 +156,7 @@ class AddressForm extends React.Component {
   handleCreateAddress = () => {
     const { userID, activeItem } = this.props;
     const { formData } = this.state;
+    console.log(formData);
     authAxios
       .post(addressCreateURL, {
         ...formData,
@@ -167,10 +169,10 @@ class AddressForm extends React.Component {
           success: true,
           formData: { default: false }
         });
-        this.props.callback();
+        this.props.callback(); //from controlles to uncontrolled
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err.message });
       });
   };
 
@@ -192,7 +194,7 @@ class AddressForm extends React.Component {
         this.props.callback();
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err.message });
       });
   };
 
@@ -265,13 +267,16 @@ class Profile extends React.Component {
     addresses: [],
     countries: [],
     userID: null,
-    selectedAddress: null
+    selectedAddress: null,
+    displayForm: true,
   };
 
   componentDidMount() {
     this.handleFetchAddresses();
     this.handleFetchCountries();
     this.handleFetchUserID();
+    this.setState({ addresses: [1] })
+    console.log(this.state.addresses.length);
   }
 
   handleItemClick = name => {
@@ -308,7 +313,7 @@ class Profile extends React.Component {
         this.handleCallback();
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err.message });
       });
   };
 
@@ -323,7 +328,7 @@ class Profile extends React.Component {
         this.setState({ userID: res.data.userID });
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err.message });
       });
   };
 
@@ -334,7 +339,7 @@ class Profile extends React.Component {
         this.setState({ countries: this.handleFormatCountries(res.data) });
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err.message });
       });
   };
 
@@ -344,15 +349,16 @@ class Profile extends React.Component {
     authAxios
       .get(addressListURL(activeItem === "billingAddress" ? "B" : "S"))
       .then(res => {
-        this.setState({ addresses: res.data, loading: false });
+        this.setState({ addresses: res.data.results, loading: false });
       })
       .catch(err => {
-        this.setState({ error: err });
+        this.setState({ error: err.message });
       });
   };
 
   handleCallback = () => {
     this.handleFetchAddresses();
+    this.setState({ selectedAddress: "blankAddress" });
     this.setState({ selectedAddress: null });
   };
 
@@ -362,12 +368,12 @@ class Profile extends React.Component {
       addresses,
       countries,
       selectedAddress,
-      userID
+      userID,
     } = this.state;
     return (
       <React.Fragment>
         <Card.Group>
-          {addresses.map(a => {
+          {addresses && addresses.map(a => {
             return (
               <Card key={a.id}>
                 <Card.Content>
@@ -477,8 +483,8 @@ class Profile extends React.Component {
             {activeItem === "paymentHistory" ? (
               <PaymentHistory />
             ) : (
-              this.renderAddresses()
-            )}
+                this.renderAddresses()
+              )}
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -118,7 +118,7 @@ class OrderSummary extends React.Component {
           <Message
             error
             header="There was an error"
-            content={JSON.stringify(error)}
+            content={JSON.stringify(error.message)}
           />
         )}
         {loading && (
@@ -151,7 +151,7 @@ class OrderSummary extends React.Component {
                       {orderItem.item.title} -{" "}
                       {this.renderVariations(orderItem)}
                     </Table.Cell>
-                    <Table.Cell>${orderItem.item.price}</Table.Cell>
+                    <Table.Cell>${orderItem.item.price.toFixed(2)}</Table.Cell>
                     <Table.Cell textAlign="center">
                       <Icon
                         name="minus"
@@ -178,7 +178,7 @@ class OrderSummary extends React.Component {
                           ON DISCOUNT
                         </Label>
                       )}
-                      ${orderItem.final_price}
+                      ${orderItem.final_price.toFixed(2)}
                       <Icon
                         name="trash"
                         color="red"
@@ -194,7 +194,7 @@ class OrderSummary extends React.Component {
                 <Table.Cell />
                 <Table.Cell />
                 <Table.Cell textAlign="right" colSpan="2">
-                  Order Total: ${data.total}
+                  Order Total: ${data.total.toFixed(2)}
                 </Table.Cell>
               </Table.Row>
             </Table.Body>

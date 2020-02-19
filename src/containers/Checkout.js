@@ -21,12 +21,12 @@ import {
   Select
 } from "semantic-ui-react";
 import { Link, withRouter } from "react-router-dom";
-import { authAxios } from "../utils";
+import { authAxios, numberWithCommas } from "../utils";
 import {
   checkoutURL,
   orderSummaryURL,
   addCouponURL,
-  addressListURL
+  addressListURL,
 } from "../constants";
 
 const OrderPreview = props => {
@@ -41,14 +41,14 @@ const OrderPreview = props => {
                 <Item key={i}>
                   <Item.Image
                     size="tiny"
-                    src={`http://127.0.0.1:8000${orderItem.item.image}`}
+                    src={`${orderItem.item.image}`}
                   />
                   <Item.Content verticalAlign="middle">
                     <Item.Header as="a">
                       {orderItem.quantity} x {orderItem.item.title}
                     </Item.Header>
                     <Item.Extra>
-                      <Label>${orderItem.final_price}</Label>
+                      <Label>$ {numberWithCommas(orderItem.final_price.toFixed(2))}</Label>
                     </Item.Extra>
                   </Item.Content>
                 </Item>
@@ -60,7 +60,7 @@ const OrderPreview = props => {
             <Item>
               <Item.Content>
                 <Item.Header>
-                  Order Total: ${data.total}
+                  Order Total: $ {numberWithCommas(data.total.toFixed(2))}
                   {data.coupon && (
                     <Label color="green" style={{ marginLeft: "10px" }}>
                       Current coupon: {data.coupon.code} for $
@@ -139,6 +139,16 @@ class CheckoutForm extends Component {
     }
     return "";
   };
+  handleBillingAddress = (addresses) => {
+    const billingAddresses = addresses.map(a => {
+      return {
+        key: a.id,
+        text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
+        value: a.id
+      }
+    })
+    this.setState({ billingAddresses: billingAddresses })
+  }
 
   handleFetchBillingAddresses = () => {
     this.setState({ loading: true });
@@ -146,14 +156,14 @@ class CheckoutForm extends Component {
       .get(addressListURL("B"))
       .then(res => {
         this.setState({
-          billingAddresses: res.data.map(a => {
+          billingAddresses: res.data.results.map(a => {
             return {
               key: a.id,
               text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
               value: a.id
-            };
+            }
           }),
-          selectedBillingAddress: this.handleGetDefaultAddress(res.data),
+          selectedBillingAddress: this.handleGetDefaultAddress(res.data.results),
           loading: false
         });
       })
@@ -168,14 +178,14 @@ class CheckoutForm extends Component {
       .get(addressListURL("S"))
       .then(res => {
         this.setState({
-          shippingAddresses: res.data.map(a => {
+          shippingAddresses: res.data.results.map(a => {
             return {
               key: a.id,
               text: `${a.street_address}, ${a.apartment_address}, ${a.country}`,
               value: a.id
             };
           }),
-          selectedShippingAddress: this.handleGetDefaultAddress(res.data),
+          selectedShippingAddress: this.handleGetDefaultAddress(res.data.results),
           loading: false
         });
       })
@@ -264,7 +274,7 @@ class CheckoutForm extends Component {
 
     return (
       <div>
-        {error && (
+        {error !== null && (
           <Message
             error
             header="There was some errors with your submission"
@@ -297,10 +307,10 @@ class CheckoutForm extends Component {
             onChange={this.handleSelectChange}
           />
         ) : (
-          <p>
-            You need to <Link to="/profile">add a billing address</Link>
-          </p>
-        )}
+            <p>
+              You need to <Link to="/profile">add a billing address</Link>
+            </p>
+          )}
         <Header>Select a shipping address</Header>
         {shippingAddresses.length > 0 ? (
           <Select
@@ -312,37 +322,37 @@ class CheckoutForm extends Component {
             onChange={this.handleSelectChange}
           />
         ) : (
-          <p>
-            You need to <Link to="/profile">add a shipping address</Link>
-          </p>
-        )}
+            <p>
+              You need to <Link to="/profile">add a shipping address</Link>
+            </p>
+          )}
         <Divider />
 
         {billingAddresses.length < 1 || shippingAddresses.length < 1 ? (
           <p>You need to add addresses before you can complete your purchase</p>
         ) : (
-          <React.Fragment>
-            <Header>Would you like to complete the purchase?</Header>
-            <CardElement />
-            {success && (
-              <Message positive>
-                <Message.Header>Your payment was successful</Message.Header>
-                <p>
-                  Go to your <b>profile</b> to see the order delivery status.
+            <React.Fragment>
+              <Header>Would you like to complete the purchase?</Header>
+              <CardElement className="MyCardElement"/>
+              {success && (
+                <Message positive>
+                  <Message.Header>Your payment was successful</Message.Header>
+                  <p>
+                    Go to your <b>profile</b> to see the order delivery status.
                 </p>
-              </Message>
-            )}
-            <Button
-              loading={loading}
-              disabled={loading}
-              primary
-              onClick={this.submit}
-              style={{ marginTop: "10px" }}
-            >
-              Submit
+                </Message>
+              )}
+              <Button
+                loading={loading}
+                disabled={loading}
+                primary
+                onClick={this.submit}
+                style={{ marginTop: "10px" }}
+              >
+                Submit
             </Button>
-          </React.Fragment>
-        )}
+            </React.Fragment>
+          )}
       </div>
     );
   }
@@ -352,13 +362,14 @@ const InjectedForm = withRouter(injectStripe(CheckoutForm));
 
 const WrappedForm = () => (
   <Container text>
-    <StripeProvider apiKey="">
-      <div>
-        <h1>Complete your order</h1>
-        <Elements>
-          <InjectedForm />
-        </Elements>
-      </div>
+    <StripeProvider apiKey="pk_test_QKAECdE2COf39hpqoQxnpWKw004wuxBPhe">
+    <div>
+      <h1>Complete your order</h1>
+      <Elements>
+      {/* <CheckoutForm /> */}
+      <InjectedForm />
+      </Elements>
+    </div>
     </StripeProvider>
   </Container>
 );

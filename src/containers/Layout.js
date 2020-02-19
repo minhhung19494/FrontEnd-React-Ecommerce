@@ -137,7 +137,7 @@ class CustomLayout extends React.Component {
             </Grid>
 
             <Divider inverted section />
-            <Image centered size="mini" src="/logo.png" />
+            <Image centered size="small" src="https://cdn.dribbble.com/users/3659972/screenshots/6710532/sneak.jpg" />
             <List horizontal inverted divided link size="small">
               <List.Item as="a" href="#">
                 Site Map
