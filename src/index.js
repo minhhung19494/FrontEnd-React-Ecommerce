@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { HashRouter as Router, HashRouter } from "react-router-dom";
-
+import * as serviceWorker from './serviceWorker';
 import authReducer from "./store/reducers/auth";
 import cartReducer from "./store/reducers/cart";
 
@@ -28,4 +27,4 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById("root"));
-registerServiceWorker();
+serviceWorker.unregister();

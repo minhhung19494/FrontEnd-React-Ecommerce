@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/FrontEnd-React-Ecommerce/static/js/main.47665a6a.chunk.js",
-    "main.js.map": "/FrontEnd-React-Ecommerce/static/js/main.47665a6a.chunk.js.map",
+    "main.js": "/FrontEnd-React-Ecommerce/static/js/main.c51ad194.chunk.js",
+    "main.js.map": "/FrontEnd-React-Ecommerce/static/js/main.c51ad194.chunk.js.map",
     "runtime-main.js": "/FrontEnd-React-Ecommerce/static/js/runtime-main.e181d25c.js",
     "runtime-main.js.map": "/FrontEnd-React-Ecommerce/static/js/runtime-main.e181d25c.js.map",
     "static/css/2.636fa6ab.chunk.css": "/FrontEnd-React-Ecommerce/static/css/2.636fa6ab.chunk.css",
-    "static/js/2.47921ae9.chunk.js": "/FrontEnd-React-Ecommerce/static/js/2.47921ae9.chunk.js",
-    "static/js/2.47921ae9.chunk.js.map": "/FrontEnd-React-Ecommerce/static/js/2.47921ae9.chunk.js.map",
+    "static/js/2.57ba67b9.chunk.js": "/FrontEnd-React-Ecommerce/static/js/2.57ba67b9.chunk.js",
+    "static/js/2.57ba67b9.chunk.js.map": "/FrontEnd-React-Ecommerce/static/js/2.57ba67b9.chunk.js.map",
     "index.html": "/FrontEnd-React-Ecommerce/index.html",
-    "precache-manifest.e60f72b7c2314cd0c21d1193da2b9eeb.js": "/FrontEnd-React-Ecommerce/precache-manifest.e60f72b7c2314cd0c21d1193da2b9eeb.js",
+    "precache-manifest.66152a806eeb01fb5b4691c360cc54a6.js": "/FrontEnd-React-Ecommerce/precache-manifest.66152a806eeb01fb5b4691c360cc54a6.js",
     "service-worker.js": "/FrontEnd-React-Ecommerce/service-worker.js",
     "static/css/2.636fa6ab.chunk.css.map": "/FrontEnd-React-Ecommerce/static/css/2.636fa6ab.chunk.css.map",
-    "static/js/2.47921ae9.chunk.js.LICENSE.txt": "/FrontEnd-React-Ecommerce/static/js/2.47921ae9.chunk.js.LICENSE.txt",
+    "static/js/2.57ba67b9.chunk.js.LICENSE.txt": "/FrontEnd-React-Ecommerce/static/js/2.57ba67b9.chunk.js.LICENSE.txt",
     "static/media/semantic.min.css": "/FrontEnd-React-Ecommerce/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.e181d25c.js",
     "static/css/2.636fa6ab.chunk.css",
-    "static/js/2.47921ae9.chunk.js",
-    "static/js/main.47665a6a.chunk.js"
+    "static/js/2.57ba67b9.chunk.js",
+    "static/js/main.c51ad194.chunk.js"
   ]
 }
